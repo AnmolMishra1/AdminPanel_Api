@@ -23,7 +23,7 @@ This is a backend API built with Node.js and Express for managing an Admin Panel
 1. **Clone the Repository:**
 
 ```bash
-git clone https://github.com/yourusername/admin-panel-api.git
+git clone https://github.com/AnmolMishra1/admin-panel-api.git
 cd admin-panel-api
 ```
 
