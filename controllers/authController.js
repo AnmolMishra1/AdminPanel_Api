@@ -1,15 +1,17 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+// const Admin = require('../models/Admin')
 const Role = require('../models/Role');
 const AuditLog = require('../models/AuditLog');
+const Admin = require('../models/Admin');
 // Signup (Create Admin User)
 exports.signup = async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
         // Check if an Admin already exists
-        const existingAdmin = await User.findOne({ where: { roleId: 1 } });
+        const existingAdmin = await Admin.findOne({ where: { roleId: 1 } });
         if (existingAdmin) {
             return res.status(400).json({ message: 'Admin user already exists' });
         }
@@ -19,7 +21,7 @@ exports.signup = async (req, res) => {
 
         if (!role) return res.status(404).json({ message: 'Role not found' });
 
-        const user = await User.create({
+        const user = await Admin.create({
             username,
             email,
             password: hashedPassword,
@@ -63,7 +65,7 @@ exports.registerUser = async (req, res) => {
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ where: { email } });
+        const user = await Admin.findOne({ where: { email } });
 
         if (!user) return res.status(404).json({ message: 'User not found' });
 

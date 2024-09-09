@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Admin = require('../models/Admin');
 
 // Verify JWT token
 exports.verifyToken = (req, res, next) => {
@@ -20,7 +21,7 @@ exports.verifyToken = (req, res, next) => {
 exports.adminOnly = async (req, res, next) => {
     try {
         // Find the user by their ID (decoded from the token)
-        const user = await User.findByPk(req.user.id);
+        const user = await Admin.findByPk(req.user.id);
 
         // Check if user exists and if they have admin role (assuming roleId of 1 is Admin)
         if (!user || user.roleId !== 1) {
